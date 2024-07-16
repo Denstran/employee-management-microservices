@@ -1,0 +1,15 @@
+server:
+    port: 8888
+spring:
+    application:
+        name: GitHubConfigServer
+    cloud:
+        config:
+            server:
+                git:
+                    basedir: file://c:/tmp/yourConfigDir
+                    clone-on-start: true
+                    default-label: main
+                    password: yourPassword
+                    username: yourUsername
+                    uri: linkToYourConfigRepo

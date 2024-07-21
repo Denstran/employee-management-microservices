@@ -1,0 +1,7 @@
+spring:
+    application:
+        name: administration-service
+    profiles:
+        active: microservice, dbconfig
+    config:
+        import: configserver:http://localhost:8888

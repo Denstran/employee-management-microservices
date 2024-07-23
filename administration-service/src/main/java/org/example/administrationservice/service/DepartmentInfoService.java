@@ -52,4 +52,13 @@ public class DepartmentInfoService {
         return repository.findById(pk).orElseThrow(
                 () -> new ResourceNotFoundException("Такой отдел не существует!"));
     }
+
+    public DepartmentInfo getById(Long companyBranchId, Long departmentId) {
+        return repository.findDepartmentInfoByPk_CompanyBranch_IdAndPk_Department_Id(companyBranchId, departmentId)
+                .orElseThrow(() -> new ResourceNotFoundException("Такой отдел не существует!"));
+    }
+
+    public boolean existsById(Long companyBranchId, Long departmentId) {
+        return repository.existsById(companyBranchId, departmentId);
+    }
 }

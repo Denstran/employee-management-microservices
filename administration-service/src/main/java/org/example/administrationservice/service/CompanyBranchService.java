@@ -2,11 +2,14 @@ package org.example.administrationservice.service;
 
 import org.example.administrationservice.exception.ResourceNotFoundException;
 import org.example.administrationservice.model.Money;
+import org.example.administrationservice.model.companyBranch.Address;
 import org.example.administrationservice.model.companyBranch.CompanyBranch;
 import org.example.administrationservice.repository.CompanyBranchRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Optional;
 
 @Service
 public class CompanyBranchService {
@@ -63,5 +66,21 @@ public class CompanyBranchService {
        companyBranch.adjustBudget(budgetAdjustment);
 
        companyBranchRepository.save(companyBranch);
+    }
+
+    public boolean existsByAddress(Address address) {
+        return companyBranchRepository.existsByCompanyBranchAddress(address);
+    }
+
+    public boolean existsByPhoneNumber(String phoneNumber) {
+        return companyBranchRepository.existsByPhoneNumber(phoneNumber);
+    }
+
+    public Optional<CompanyBranch> getByAddress(Address address) {
+        return companyBranchRepository.findCompanyBranchByCompanyBranchAddress(address);
+    }
+
+    public Optional<CompanyBranch> getByPhoneNumber(String phoneNumber) {
+        return companyBranchRepository.findCompanyBranchByPhoneNumber(phoneNumber);
     }
 }

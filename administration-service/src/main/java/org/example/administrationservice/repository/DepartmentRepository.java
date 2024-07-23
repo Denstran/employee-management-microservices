@@ -1,6 +1,5 @@
 package org.example.administrationservice.repository;
 
-
 import org.example.administrationservice.model.department.Department;
 import org.example.administrationservice.model.department.DepartmentType;
 import org.springframework.data.jpa.repository.JpaRepository;

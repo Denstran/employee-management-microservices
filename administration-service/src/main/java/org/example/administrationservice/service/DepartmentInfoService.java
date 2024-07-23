@@ -1,7 +1,7 @@
 package org.example.administrationservice.service;
 
 import org.example.administrationservice.exception.ResourceNotFoundException;
-import org.example.administrationservice.model.CompanyBranchDepartmentPK;
+import org.example.administrationservice.model.department.CompanyBranchDepartmentPK;
 import org.example.administrationservice.model.Money;
 import org.example.administrationservice.model.department.DepartmentInfo;
 import org.example.administrationservice.repository.DepartmentInfoRepository;

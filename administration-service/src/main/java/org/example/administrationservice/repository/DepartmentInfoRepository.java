@@ -1,7 +1,7 @@
 package org.example.administrationservice.repository;
 
 
-import org.example.administrationservice.model.CompanyBranchDepartmentPK;
+import org.example.administrationservice.model.department.CompanyBranchDepartmentPK;
 import org.example.administrationservice.model.department.DepartmentInfo;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

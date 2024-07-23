@@ -5,7 +5,6 @@ import lombok.Getter;
 import lombok.Setter;
 import org.example.administrationservice.event.department.DepartmentInfoBudgetReduced;
 import org.example.administrationservice.event.department.DepartmentInfoRegistered;
-import org.example.administrationservice.model.CompanyBranchDepartmentPK;
 import org.example.administrationservice.model.Money;
 import org.springframework.data.domain.AbstractAggregateRoot;
 

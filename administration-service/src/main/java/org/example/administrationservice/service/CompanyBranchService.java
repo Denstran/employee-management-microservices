@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -21,8 +22,7 @@ public class CompanyBranchService {
     }
 
     @Transactional
-    public void save(CompanyBranch companyBranch) {
-        companyBranch.createCompanyBranch();
+    public void create(CompanyBranch companyBranch) {
         companyBranchRepository.save(companyBranch);
     }
 
@@ -82,5 +82,15 @@ public class CompanyBranchService {
 
     public Optional<CompanyBranch> getByPhoneNumber(String phoneNumber) {
         return companyBranchRepository.findCompanyBranchByPhoneNumber(phoneNumber);
+    }
+
+    public CompanyBranch getReference(Long companyBranchId) {
+        if (companyBranchId == null || companyBranchId < 1)
+            throw new IllegalArgumentException("Выбран несуществующий отдел!");
+        return companyBranchRepository.getReferenceById(companyBranchId);
+    }
+
+    public List<CompanyBranch> getAll() {
+        return companyBranchRepository.findAll();
     }
 }

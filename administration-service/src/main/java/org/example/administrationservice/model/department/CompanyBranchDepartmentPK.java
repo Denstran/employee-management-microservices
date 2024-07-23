@@ -1,4 +1,4 @@
-package org.example.administrationservice.model;
+package org.example.administrationservice.model.department;
 
 import jakarta.persistence.Embeddable;
 import jakarta.persistence.JoinColumn;
@@ -8,7 +8,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.example.administrationservice.model.companyBranch.CompanyBranch;
-import org.example.administrationservice.model.department.Department;
 
 import java.io.Serializable;
 import java.util.Objects;

@@ -5,3 +5,5 @@ spring:
         active: microservice, dbconfig
     config:
         import: configserver:http://localhost:8888
+    kafka:
+        bootstrap-servers: localhost:9092

@@ -57,4 +57,9 @@ public class DepartmentService {
     public List<Department> getAll() {
         return repository.findAll();
     }
+
+    public Department getByPositionName(String positionName) {
+        return repository.findByPositionName(positionName).orElseThrow(
+                () -> new ResourceNotFoundException("Отдела с такой должностью не существует!"));
+    }
 }

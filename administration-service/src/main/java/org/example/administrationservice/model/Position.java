@@ -6,6 +6,7 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
+import org.example.administrationservice.event.PositionLeadingChanged;
 import org.example.administrationservice.model.department.Department;
 import org.springframework.data.domain.AbstractAggregateRoot;
 
@@ -34,6 +35,10 @@ public class Position extends AbstractAggregateRoot<Position> {
     @Column(name = "IS_LEADING")
     @NotNull(message = "Значение управленческой должности не может быть пустым")
     private boolean leading;
+
+    public void changeLeading() {
+        registerEvent(new PositionLeadingChanged(this.id, this.leading));
+    }
 
     @Override
     public boolean equals(Object o) {

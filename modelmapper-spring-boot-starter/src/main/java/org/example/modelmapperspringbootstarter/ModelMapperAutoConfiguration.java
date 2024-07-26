@@ -3,12 +3,12 @@ package org.example.modelmapperspringbootstarter;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
 import org.modelmapper.spi.MatchingStrategy;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 
-@Configuration
+@AutoConfiguration
 @EnableConfigurationProperties(ModelMapperProperties.class)
 public class ModelMapperAutoConfiguration {
 
@@ -20,7 +20,7 @@ public class ModelMapperAutoConfiguration {
 
     @Bean
     @ConditionalOnProperty(prefix = "modelmapper",
-            name = {"matchingStrategy", "enableFieldMatching", "fieldAccessLevel"})
+            name = {"matching-strategy", "enable-field-matching", "field-access-level"})
     public ModelMapper modelMapper() throws Exception {
         ModelMapper modelMapper = new ModelMapper();
 

@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 public class DepartmentInfoService {
     private final DepartmentInfoRepository repository;
@@ -56,6 +58,10 @@ public class DepartmentInfoService {
     public DepartmentInfo getById(Long companyBranchId, Long departmentId) {
         return repository.findDepartmentInfoByPk_CompanyBranch_IdAndPk_Department_Id(companyBranchId, departmentId)
                 .orElseThrow(() -> new ResourceNotFoundException("Такой отдел не существует!"));
+    }
+
+    public List<DepartmentInfo> getAllByCompanyBranchId(Long companyBranchId) {
+        return repository.findByPk_CompanyBranch_Id(companyBranchId);
     }
 
     public boolean existsById(Long companyBranchId, Long departmentId) {

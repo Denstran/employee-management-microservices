@@ -1,10 +1,10 @@
-package org.example.administrationservice.event.companyBranch;
+package org.example.paymentlogservice.event.companyBranch;
 
 import lombok.Getter;
-import org.example.administrationservice.model.Money;
+import org.example.paymentlogservice.dto.Money;
 
 @Getter
-public class CompanyBranchBudgetReduced extends AbstractCompanyBranchEvent{
+public class CompanyBranchBudgetReduced extends AbstractCompanyBranchEvent {
     private final Money reducedAmount;
 
     public CompanyBranchBudgetReduced(Long companyBranchId, Money reducedAmount) {

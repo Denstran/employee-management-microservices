@@ -6,6 +6,9 @@ import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
+import org.example.paymentlogservice.event.companyBranch.CompanyBranchBudgetAdjusted;
+import org.example.paymentlogservice.event.companyBranch.CompanyBranchBudgetReduced;
+import org.example.paymentlogservice.event.companyBranch.CompanyBranchCreated;
 
 @Entity
 @Table(name = "COMPANY_BRANCH_PAYMENT_LOG")
@@ -23,9 +26,30 @@ public class CompanyBranchPaymentLog extends BasePaymentEntity {
         CompanyBranchPaymentLog companyBranchPaymentLog = new CompanyBranchPaymentLog();
         companyBranchPaymentLog.setCompanyBranchId(companyBranchId);
         companyBranchPaymentLog.setPaymentType(PaymentType.BUDGET_CHANGES);
-        companyBranchPaymentLog
-                .setPaymentAmount(amount);
+        companyBranchPaymentLog.setPaymentAmount(amount);
         companyBranchPaymentLog.setTransferAction(isPositive ? TransferAction.INCREASE : TransferAction.DECREASE);
-        return  companyBranchPaymentLog;
+        return companyBranchPaymentLog;
+    }
+
+    public static CompanyBranchPaymentLog createPaymentLog(CompanyBranchCreated event) {
+        return createPaymentLog(
+                event.getCompanyBranchId(),
+                new Money(event.getBudget().getAmount()),
+                true);
+    }
+
+
+    public static CompanyBranchPaymentLog createPaymentLog(CompanyBranchBudgetAdjusted event) {
+        return createPaymentLog(
+                event.getCompanyBranchId(),
+                new Money(event.getAdjustmentAmount().getAmount()),
+                true);
+    }
+
+    public static CompanyBranchPaymentLog createPaymentLog(CompanyBranchBudgetReduced event) {
+        return createPaymentLog(
+                event.getCompanyBranchId(),
+                new Money(event.getReducedAmount().getAmount()),
+                false);
     }
 }

@@ -6,6 +6,9 @@ import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
+import org.example.paymentlogservice.event.departmentInfo.DepartmentInfoBudgetAdjusted;
+import org.example.paymentlogservice.event.departmentInfo.DepartmentInfoBudgetReduced;
+import org.example.paymentlogservice.event.departmentInfo.DepartmentInfoRegistered;
 
 @Entity
 @Table(name = "DEPARTMENT_INFO_PAYMENT_LOG")
@@ -33,5 +36,30 @@ public class DepartmentInfoPaymentLog extends BasePaymentEntity {
                 .setPaymentAmount(amount);
         departmentInfoPaymentLog.setTransferAction(isPositive ? TransferAction.INCREASE : TransferAction.DECREASE);
         return departmentInfoPaymentLog;
+    }
+
+    public static DepartmentInfoPaymentLog createPaymentLog(DepartmentInfoBudgetAdjusted event) {
+        return createPaymentLog(
+                event.getCompanyBranchId(),
+                event.getDepartmentId(),
+                new Money(event.getAdjustmentAmount().getAmount()),
+                true);
+    }
+
+    public static DepartmentInfoPaymentLog createPaymentLog(DepartmentInfoBudgetReduced event) {
+        return createPaymentLog(
+                event.getCompanyBranchId(),
+                event.getDepartmentId(),
+                new Money(event.getReduceAmount().getAmount()),
+                false
+        );
+    }
+
+    public static DepartmentInfoPaymentLog createPaymentLog(DepartmentInfoRegistered event) {
+        return createPaymentLog(
+                event.getCompanyBranchId(),
+                event.getDepartmentId(),
+                new Money(event.getDepartmentBudget().getAmount()),
+                true);
     }
 }

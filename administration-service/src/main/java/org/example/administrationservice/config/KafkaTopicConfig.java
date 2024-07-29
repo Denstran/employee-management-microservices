@@ -38,4 +38,9 @@ public class KafkaTopicConfig {
         return new NewTopic("position", 5, (short) 1);
     }
 
+    @Bean
+    public NewTopic employee() {
+        return new NewTopic("employee", 5, (short) 1);
+    }
+
 }

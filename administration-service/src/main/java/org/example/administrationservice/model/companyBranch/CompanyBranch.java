@@ -8,6 +8,8 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.example.administrationservice.event.companyBranch.CompanyBranchBudgetAdjusted;
+import org.example.administrationservice.event.companyBranch.CompanyBranchBudgetReduced;
 import org.example.administrationservice.event.companyBranch.CompanyBranchCreated;
 import org.example.administrationservice.model.Money;
 import org.hibernate.annotations.SQLDelete;
@@ -84,8 +86,10 @@ public class CompanyBranch extends AbstractAggregateRoot<CompanyBranch> {
 
     public void adjustBudget(Money adjustmentAmount) {
         this.budget = Money.sum(this.budget, new Money(adjustmentAmount));
+        registerEvent(new CompanyBranchBudgetAdjusted(this.id, new Money(adjustmentAmount)));
     }
     public void reduceBudget(Money reduceAmount) {
         this.budget = Money.subtract(this.getBudget(), new Money(reduceAmount));
+        registerEvent(new CompanyBranchBudgetReduced(this.id, Money.abs(reduceAmount)));
     }
 }

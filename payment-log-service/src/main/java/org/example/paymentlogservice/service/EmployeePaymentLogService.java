@@ -12,7 +12,6 @@ import org.example.paymentlogservice.service.specification.PaymentSpecificationP
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
@@ -33,7 +32,7 @@ public class EmployeePaymentLogService {
         this.employeeService = employeeService;
     }
 
-    @Transactional(propagation = Propagation.REQUIRES_NEW)
+    @Transactional
     public void saveEmployeePaymentLog(EmployeePaymentLog employeePaymentLog) {
         repository.save(employeePaymentLog);
     }

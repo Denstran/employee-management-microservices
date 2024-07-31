@@ -2,7 +2,7 @@ spring:
     application:
         name: payment-log-service
     profiles:
-        active: microservice, dbconfig
+        active: microservice, dbconfig, modelmapperconfig
     config:
         import: configserver:http://localhost:8888
     kafka:

@@ -13,6 +13,7 @@
         <option value="$PROJECT_DIR$/administration-service/pom.xml" />
         <option value="$PROJECT_DIR$/modelmapper-spring-boot-starter/pom.xml" />
         <option value="$PROJECT_DIR$/payment-log-service/pom.xml" />
+        <option value="$PROJECT_DIR$/task-service/pom.xml" />
       </list>
     </option>
     <option name="ignoredFiles">

@@ -1,0 +1,11 @@
+spring:
+    application:
+        name: task-service
+    profiles:
+        active: microservice, dbconfig, modelmapperconfig
+    config:
+        import: configserver:http://localhost:8888
+    kafka:
+        bootstrap-servers: localhost:9092
+        consumer:
+            group-id: tasks

@@ -2,6 +2,7 @@ package org.example.paymentlogservice.service;
 
 import org.example.dates.DateUtils;
 import org.example.paymentlogservice.dto.EmployeeDTO;
+import org.example.paymentlogservice.event.employeePaymentLog.EmployeePaymentCreated;
 import org.example.paymentlogservice.feign.EmployeeService;
 import org.example.paymentlogservice.model.EmployeePaymentLog;
 import org.example.paymentlogservice.model.Money;
@@ -10,6 +11,7 @@ import org.example.paymentlogservice.repository.EmployeePaymentLogRepository;
 import org.example.paymentlogservice.service.specification.EmployeePaymentLogSpec;
 import org.example.paymentlogservice.service.specification.PaymentSpecificationProcessor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,18 +24,28 @@ public class EmployeePaymentLogService {
     private final EmployeePaymentLogRepository repository;
     private final EmployeePaymentLogSpec employeePaymentLogSpec;
     private final EmployeeService employeeService;
+    private final ApplicationEventPublisher eventPublisher;
 
     @Autowired
     public EmployeePaymentLogService(EmployeePaymentLogRepository repository,
                                      EmployeePaymentLogSpec employeePaymentLogSpec,
-                                     EmployeeService employeeService) {
+                                     EmployeeService employeeService,
+                                     ApplicationEventPublisher eventPublisher) {
         this.repository = repository;
         this.employeePaymentLogSpec = employeePaymentLogSpec;
         this.employeeService = employeeService;
+        this.eventPublisher = eventPublisher;
     }
 
     @Transactional
     public void saveEmployeePaymentLog(EmployeePaymentLog employeePaymentLog) {
+        eventPublisher.publishEvent(new EmployeePaymentCreated(
+                employeePaymentLog.getEmployeeId(),
+                employeePaymentLog.getPaymentType(),
+                employeePaymentLog.getPaymentAmount(),
+                employeePaymentLog.getDateOfPayment(),
+                employeePaymentLog.getTransferAction()
+        ));
         repository.save(employeePaymentLog);
     }
 

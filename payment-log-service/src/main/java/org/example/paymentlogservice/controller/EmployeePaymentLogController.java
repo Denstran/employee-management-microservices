@@ -1,10 +1,14 @@
 package org.example.paymentlogservice.controller;
 
+import jakarta.validation.Valid;
 import org.example.paymentlogservice.dto.EmployeePaymentLogDTO;
+import org.example.paymentlogservice.dto.ValidationErrorResponse;
 import org.example.paymentlogservice.dto.mapper.EmployeePaymentLogMapper;
+import org.example.paymentlogservice.model.EmployeePaymentLog;
 import org.example.paymentlogservice.service.EmployeePaymentLogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -47,5 +51,21 @@ public class EmployeePaymentLogController {
                 service.getEmployeePaymentLog(employeeId, startDate, endDate, transferAction));
 
         return ResponseEntity.ok(paymentLogDTOS);
+    }
+
+    @PostMapping("/{employeeId}/create")
+    public ResponseEntity<?> createEmployeePaymentLog(@RequestBody @Valid EmployeePaymentLogDTO dto,
+                                                      BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            ValidationErrorResponse errorResponse =
+                    ValidationErrorResponse.createValidationErrorResponse(bindingResult);
+
+            return ResponseEntity.badRequest().body(errorResponse);
+        }
+
+        EmployeePaymentLog paymentLog = mapper.toEntity(dto);
+        service.saveEmployeePaymentLog(paymentLog);
+
+        return ResponseEntity.ok("Created");
     }
 }

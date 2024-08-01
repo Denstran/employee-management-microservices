@@ -43,7 +43,7 @@ public class Task extends AbstractAggregateRoot<Task> {
     private TaskStatus taskStatus;
 
     @Column(name = "TASK_OWNER_EMAIL")
-    private String taskOwnerIdEmail;
+    private String taskOwnerEmail;
 
     @Column(name = "TASK_GIVER_EMAIL")
     private String taskGiverEmail;
@@ -61,7 +61,7 @@ public class Task extends AbstractAggregateRoot<Task> {
                 ", taskCreated=" + taskCreated +
                 ", taskDeadLine=" + taskDeadLine +
                 ", taskStatus=" + taskStatus +
-                ", taskOwner=" + taskOwnerIdEmail +
+                ", taskOwner=" + taskOwnerEmail +
                 ", taskGiver=" + taskGiverEmail +
                 '}';
     }
@@ -70,7 +70,7 @@ public class Task extends AbstractAggregateRoot<Task> {
         taskCreated = LocalDate.now();
         taskStatus = TaskStatus.IN_PROCESS;
         registerEvent(new TaskCreated(
-                getTaskOwnerIdEmail(),
+                getTaskOwnerEmail(),
                 taskDescription,
                 getTaskGiverEmail(),
                 taskDeadLine));
@@ -80,20 +80,20 @@ public class Task extends AbstractAggregateRoot<Task> {
         taskStatus = TaskStatus.ON_VALIDATION;
         registerEvent(new TaskFinished(
                 taskGiverEmail,
-                taskOwnerIdEmail,
+                taskOwnerEmail,
                 LocalDate.now(),
                 taskDescription));
     }
 
     public void approve() {
         taskStatus = TaskStatus.FINISHED;
-        registerEvent(new TaskApproved(taskOwnerIdEmail, taskDescription));
+        registerEvent(new TaskApproved(taskOwnerEmail, taskDescription));
     }
 
     public void cancel() {
         taskStatus = TaskStatus.CANCELED;
         registerEvent(new TaskCanceled(
-                taskOwnerIdEmail,
+                taskOwnerEmail,
                 taskDescription,
                 taskGiverEmail));
     }
@@ -101,7 +101,7 @@ public class Task extends AbstractAggregateRoot<Task> {
     public void disapprove() {
         taskStatus = TaskStatus.IN_PROCESS;
         registerEvent(new TaskDisapproved(
-                taskOwnerIdEmail,
+                taskOwnerEmail,
                 taskDescription,
                 taskGiverEmail
         ));
@@ -109,7 +109,7 @@ public class Task extends AbstractAggregateRoot<Task> {
 
     public void extendTaskDeadline() {
         registerEvent(new TaskDeadlineExtended(
-                taskOwnerIdEmail,
+                taskOwnerEmail,
                 taskDescription,
                 taskGiverEmail,
                 taskDeadLine

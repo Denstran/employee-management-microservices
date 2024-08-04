@@ -6,6 +6,7 @@
     <file url="file://$PROJECT_DIR$/eureka-server-config/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/eureka-server/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/github-config-server/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/kafka-topics-manager/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/modelmapper-spring-boot-starter/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/payment-log-service/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/java" charset="UTF-8" />

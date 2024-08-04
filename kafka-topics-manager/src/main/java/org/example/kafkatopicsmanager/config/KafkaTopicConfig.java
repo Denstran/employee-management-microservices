@@ -1,4 +1,4 @@
-package org.example.administrationservice.config;
+package org.example.kafkatopicsmanager.config;
 
 import org.apache.kafka.clients.admin.AdminClientConfig;
 import org.apache.kafka.clients.admin.NewTopic;
@@ -41,6 +41,11 @@ public class KafkaTopicConfig {
     @Bean
     public NewTopic employee() {
         return new NewTopic("employee", 5, (short) 1);
+    }
+
+    @Bean
+    public NewTopic email() {
+        return new NewTopic("email", 5, (short) 1);
     }
 
 }

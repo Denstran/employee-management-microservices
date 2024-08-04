@@ -9,17 +9,8 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class CompanyBranchPaymentLogMapper extends AbstractMapper<CompanyBranchPaymentLog, CompanyBranchPaymentLogDTO> {
-    /**
-     * Constructor for creating a mapper
-     *
-     * @param entityClass - class of the entity
-     * @param dtoClass    - class of the dto
-     * @param mapper      - ModelMapper from library, used for mapping objects
-     */
     @Autowired
-    public CompanyBranchPaymentLogMapper(Class<CompanyBranchPaymentLog> entityClass,
-                                         Class<CompanyBranchPaymentLogDTO> dtoClass,
-                                         ModelMapper mapper) {
-        super(entityClass, dtoClass, mapper);
+    public CompanyBranchPaymentLogMapper(ModelMapper mapper) {
+        super(CompanyBranchPaymentLog.class, CompanyBranchPaymentLogDTO.class, mapper);
     }
 }

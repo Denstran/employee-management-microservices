@@ -11,10 +11,7 @@ import lombok.Setter;
 import java.util.Objects;
 
 @Entity
-@Table(name = "PRIORITY", uniqueConstraints = {
-        @UniqueConstraint(name = "CompanyBranchDepartmentUniqueConstraint", columnNames = {
-                "COMPANY_BRANCH_ID", "DEPARTMENT_ID"})
-})
+@Table(name = "PRIORITY")
 @NoArgsConstructor
 @AllArgsConstructor
 @Setter

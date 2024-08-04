@@ -11,9 +11,7 @@ import org.springframework.stereotype.Component;
 public class EmployeePaymentLogMapper extends AbstractMapper<EmployeePaymentLog, EmployeePaymentLogDTO> {
 
     @Autowired
-    public EmployeePaymentLogMapper(Class<EmployeePaymentLog> entityClass,
-                                    Class<EmployeePaymentLogDTO> dtoClass,
-                                    ModelMapper mapper) {
-        super(entityClass, dtoClass, mapper);
+    public EmployeePaymentLogMapper(ModelMapper mapper) {
+        super(EmployeePaymentLog.class, EmployeePaymentLogDTO.class, mapper);
     }
 }

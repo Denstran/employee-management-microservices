@@ -1,8 +1,10 @@
-package org.example.taskservice.dto;
+package org.example.taskservice.dto.mapper;
 
 import jakarta.annotation.PostConstruct;
 import lombok.extern.slf4j.Slf4j;
 import org.example.dtomapping.AbstractMapperWithSpecificFields;
+import org.example.taskservice.dto.EmployeeDTO;
+import org.example.taskservice.dto.TaskDTO;
 import org.example.taskservice.model.Task;
 import org.example.taskservice.service.PriorityService;
 import org.example.taskservice.service.feign.EmployeeService;

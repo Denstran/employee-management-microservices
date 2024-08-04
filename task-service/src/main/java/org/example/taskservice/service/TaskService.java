@@ -1,11 +1,14 @@
 package org.example.taskservice.service;
 
+import org.example.taskservice.exception.ResourceNotFoundException;
 import org.example.taskservice.model.Task;
 import org.example.taskservice.model.TaskStatus;
 import org.example.taskservice.repository.TaskRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Service
 public class TaskService {
@@ -79,5 +82,18 @@ public class TaskService {
 
         task.disapprove();
         return repository.save(task);
+    }
+
+    public List<Task> getByOwnerEmail(String ownerEmail) {
+        return repository.findByTaskOwnerEmail(ownerEmail);
+    }
+
+    public List<Task> getByGiverEmail(String giverEmail) {
+        return repository.findByTaskGiverEmail(giverEmail);
+    }
+
+    public Task getById(Long taskId) {
+        return repository.findById(taskId).orElseThrow(
+                () -> new ResourceNotFoundException("Не удалось найти задачу с заданным id"));
     }
 }

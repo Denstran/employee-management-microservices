@@ -11,7 +11,10 @@ import lombok.Setter;
 import java.util.Objects;
 
 @Entity
-@Table(name = "PRIORITY")
+@Table(name = "PRIORITY", uniqueConstraints = {
+        @UniqueConstraint(name = "CompanyBranchDepartmentUniqueConstraint", columnNames = {
+                "COMPANY_BRANCH_ID", "DEPARTMENT_ID"})
+})
 @NoArgsConstructor
 @AllArgsConstructor
 @Setter
@@ -22,7 +25,7 @@ public class Priority {
     @Column(name = "ID")
     private Long id;
 
-    @Column(name = "TITLE")
+    @Column(name = "TITLE", unique = true)
     @NotNull(message = "Название приоритета не может быть пустым!")
     @NotEmpty(message = "Название приоритета не может быть пустым!")
     private String title;
@@ -30,6 +33,11 @@ public class Priority {
     @NotNull(message = "Цвет приоритета не может быть пустым!")
     @NotEmpty(message = "Цвет приоритета не может быть пустым!")
     private String color;
+
+    @Column(name = "COMPANY_BRANCH_ID", updatable = false)
+    private Long companyBranchId;
+    @Column(name = "DEPARTMENT_ID", updatable = false)
+    private Long departmentId;
 
     @Override
     public boolean equals(Object o) {

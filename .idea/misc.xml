@@ -15,6 +15,7 @@
         <option value="$PROJECT_DIR$/payment-log-service/pom.xml" />
         <option value="$PROJECT_DIR$/task-service/pom.xml" />
         <option value="$PROJECT_DIR$/kafka-topics-manager/pom.xml" />
+        <option value="$PROJECT_DIR$/email-service/pom.xml" />
       </list>
     </option>
     <option name="ignoredFiles">
